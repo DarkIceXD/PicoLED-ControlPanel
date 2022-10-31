@@ -1,0 +1,24 @@
+{
+  "name": "controlpanel",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "devDependencies": {
+    "@astrojs/solid-js": "^1.2.2",
+    "@astrojs/tailwind": "^2.1.1",
+    "@tailwindcss/forms": "^0.5.3",
+    "astro": "^1.6.2",
+    "astro-compress": "^1.1.1",
+    "solid-js": "^1.6.1"
+  },
+  "dependencies": {
+    "astro-icon": "^0.8.0",
+    "solid-icons": "^1.0.4"
+  }
+}

@@ -1,19 +1,6 @@
 /* @jsxImportSource solid-js */
 import { createSignal } from "solid-js"
-
-const send = (url, key, value) => {
-    fetch(url, {
-        method: 'POST',
-        body: `${key},${value}`
-    })
-}
-
-const get = (url, key) => {
-    return fetch(url + "/get", {
-        method: 'POST',
-        body: `${key}`
-    })
-}
+import { get, send } from "./Utils"
 
 export default function (props) {
     const [value, setValue] = createSignal("");
@@ -23,7 +10,7 @@ export default function (props) {
         .catch((error) => console.error('Error:', error))
     return (
         <>
-            <label class="flex items-center space-x-2 my-3">
+            <label class="flex items-center space-x-2 my-2">
                 <input
                     type={props.type}
                     value={value()}

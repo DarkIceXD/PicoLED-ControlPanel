@@ -3,6 +3,7 @@ import Page from "../layouts/Page.astro";
 import Container from "../components/Container.astro";
 import Input from "../components/Input";
 import Dropdown from "../components/Dropdown";
+import Colors from "../components/Colors";
 import Button from "../components/Button";
 
 let key = 0;
@@ -49,39 +50,29 @@ const url = "http://192.168.4.1/api";
 						url={url}
 						key={key++}
 						options={[
-							"Primary",
-							"Secondary",
+							"Selected",
 							"Random",
 							"Gradient",
 							"Moving Gradient",
-							"Two Sided Gradient",
-							"Moving Two Sided Gradient",
 							"Breathing Gradient",
 							"Rainbow",
 							"Moving Rainbow",
 							"Breathing Rainbow",
 						]}
 					/>
-					<Input
+					<Colors
 						client:load
 						url={url}
 						key={key++}
 						type="color"
-						inputmode="numeric">Primary</Input
-					>
-					<Input
-						client:load
-						url={url}
-						key={key++}
-						type="color"
-						inputmode="numeric">Secondary</Input
-					>
+						inputmode="numeric"
+					/>
 					<Input
 						client:load
 						url={url}
 						key={key++}
 						type="number"
-						inputmode="numeric">Max value</Input
+						inputmode="numeric">Max</Input
 					>
 				</div>
 			</fieldset>
@@ -94,11 +85,9 @@ const url = "http://192.168.4.1/api";
 						key={key++}
 						options={[
 							"Disabled",
-							"Static",
+							"Enabled",
 							"Sparkle",
-							"Random Sparkle",
-							"Snake",
-							"Multiple Snakes",
+							"Snakes",
 							"Breathing",
 							"Fill",
 							"Fill two sided",
@@ -111,7 +100,14 @@ const url = "http://192.168.4.1/api";
 						url={url}
 						key={key++}
 						type="number"
-						inputmode="numeric">Option</Input
+						inputmode="numeric">Padding</Input
+					>
+					<Input
+						client:load
+						url={url}
+						key={key++}
+						type="number"
+						inputmode="numeric">Max</Input
 					>
 				</div>
 			</fieldset>

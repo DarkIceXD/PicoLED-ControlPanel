@@ -1,19 +1,6 @@
 /* @jsxImportSource solid-js */
 import { createSignal, For } from "solid-js"
-
-const send = (url, key, value) => {
-    fetch(url, {
-        method: 'POST',
-        body: `${key},${value}`
-    })
-}
-
-const get = (url, key) => {
-    return fetch(url + "/get", {
-        method: 'POST',
-        body: `${key}`
-    })
-}
+import { get, send } from "./Utils"
 
 export default function (props) {
     const [value, setValue] = createSignal(0);
@@ -24,7 +11,7 @@ export default function (props) {
     return (
         <>
             <select
-                class="form-select bg-white dark:bg-slate-800 shadow overflow-hidden rounded-md"
+                class="form-select bg-white dark:bg-slate-800 shadow overflow-hidden rounded-md my-2"
                 onChange={(e) => send(props.url, props.key, e.target.value)}>
                 <For each={props.options} fallback={<div>Loading...</div>}>
                     {(item, index) =>

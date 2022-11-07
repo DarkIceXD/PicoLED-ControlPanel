@@ -1,11 +1,5 @@
 /* @jsxImportSource solid-js */
-
-const send = (url, key, value) => {
-    fetch(url, {
-        method: 'POST',
-        body: `${key},${value}`
-    })
-}
+import { send } from "./Utils"
 
 export default function (props) {
     return (

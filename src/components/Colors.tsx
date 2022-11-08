@@ -7,7 +7,7 @@ export default function (props) {
     const [state, setState] = createStore({ selected: 0, colors: [] })
     const refresh = (count) => {
         for (let i = 0; i < count; i++)
-            get(props.url, `${props.key}, ${i}`)
+            get(props.url, `${props.key},2,${i}`)
                 .then((response) => response.text())
                 .then((result) => setState("colors", i, result))
                 .catch((error) => console.error('Error:', error))

@@ -4,7 +4,7 @@ import { get, send } from "./Utils"
 
 export default function (props) {
     const [value, setValue] = createSignal(0);
-    get(props.url, props.key)
+    get(props.key)
         .then((response) => response.text())
         .then((result) => setValue(parseInt(result)))
         .catch((error) => console.error('Error:', error))
@@ -12,7 +12,7 @@ export default function (props) {
         <>
             <select
                 class="form-select bg-white dark:bg-slate-800 shadow overflow-hidden rounded-md my-2"
-                onChange={(e) => send(props.url, props.key, e.target.value)}>
+                onChange={(e) => send(props.key, e.target.value)}>
                 <For each={props.options} fallback={<div>Loading...</div>}>
                     {(item, index) =>
                         <option selected={index() == value()} value={index()}>{item}</option>

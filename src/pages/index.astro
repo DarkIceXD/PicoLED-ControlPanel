@@ -7,7 +7,6 @@ import Colors from "../components/Colors";
 import Button from "../components/Button";
 
 let key = 0;
-const url = "http://192.168.4.1/api";
 ---
 
 <Page lang="en" class="dark">
@@ -21,60 +20,18 @@ const url = "http://192.168.4.1/api";
 				<div class="mt-4 space-y-2">
 					<Input
 						client:load
-						url={url}
 						key={key++}
 						type="number"
 						inputmode="numeric">Count</Input
 					>
 					<Input
 						client:load
-						url={url}
 						key={key++}
 						type="number"
 						inputmode="numeric">Update delay (ms)</Input
 					>
-					<Input
-						client:load
-						url={url}
-						key={key++}
-						type="range"
-						max="255">Brightness</Input
-					>
-				</div>
-			</fieldset>
-			<fieldset>
-				<legend class="text-lg">Color</legend>
-				<div class="mt-4 space-y-2">
-					<Dropdown
-						client:load
-						url={url}
-						key={key++}
-						options={[
-							"Selected",
-							"Random",
-							"Gradient",
-							"Moving Gradient",
-							"Breathing Gradient",
-							"Rainbow",
-							"Moving Rainbow",
-							"Breathing Rainbow",
-							"Color Palette",
-							"Moving Color Palette",
-						]}
-					/>
-					<Colors
-						client:load
-						url={url}
-						key={key++}
-						type="color"
-						inputmode="numeric"
-					/>
-					<Input
-						client:load
-						url={url}
-						key={key++}
-						type="number"
-						inputmode="numeric">Max</Input
+					<Input client:load key={key++} type="range" max="255"
+						>Brightness</Input
 					>
 				</div>
 			</fieldset>
@@ -83,7 +40,6 @@ const url = "http://192.168.4.1/api";
 				<div class="mt-4 space-y-2">
 					<Dropdown
 						client:load
-						url={url}
 						key={key++}
 						options={[
 							"Disabled",
@@ -100,14 +56,45 @@ const url = "http://192.168.4.1/api";
 					/>
 					<Input
 						client:load
-						url={url}
 						key={key++}
 						type="number"
 						inputmode="numeric">Padding</Input
 					>
 					<Input
 						client:load
-						url={url}
+						key={key++}
+						type="number"
+						inputmode="numeric">Max</Input
+					>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend class="text-lg">Color</legend>
+				<div class="mt-4 space-y-2">
+					<Dropdown
+						client:load
+						key={key++}
+						options={[
+							"Selected",
+							"Random",
+							"Gradient",
+							"Moving Gradient",
+							"Breathing Gradient",
+							"Rainbow",
+							"Moving Rainbow",
+							"Breathing Rainbow",
+							"Color Palette",
+							"Moving Color Palette",
+						]}
+					/>
+					<Colors
+						client:load
+						key={key++}
+						type="color"
+						inputmode="numeric"
+					/>
+					<Input
+						client:load
 						key={key++}
 						type="number"
 						inputmode="numeric">Max</Input
@@ -117,14 +104,10 @@ const url = "http://192.168.4.1/api";
 			<details>
 				<summary class="text-lg select-none">WiFi settings</summary>
 				<p>These settings get changed after a reboot.</p>
-				<Input client:load url={url} key={key++} type="text"
-					>AP Name</Input
-				>
-				<Input client:load url={url} key={key++} type="text"
-					>Password</Input
-				>
+				<Input client:load key={key++} type="text">AP Name</Input>
+				<Input client:load key={key++} type="text">Password</Input>
 			</details>
-			<Button client:load url={url} key={key++}>Save</Button>
+			<Button client:load key={key++}>Save</Button>
 		</div>
 	</Container>
 </Page>

@@ -7,36 +7,36 @@ export default function (props) {
     const [state, setState] = createStore({ selected: 0, colors: [], max: 0 })
     const refresh = (count) => {
         for (let i = 0; i < count; i++)
-            get(`${props.key},2,${i}`)
+            get(props.key, 2, i)
                 .then((response) => response.text())
                 .then((result) => setState("colors", i, result))
                 .catch((error) => console.error('Error:', error))
     }
-    get(`${props.key},0`)
+    get(props.key, 0)
         .then((response) => response.text())
         .then((result) => refresh(parseInt(result)))
         .catch((error) => console.error('Error:', error))
-    get(`${props.key},1`)
+    get(props.key, 1)
         .then((response) => response.text())
         .then((result) => setState({ selected: parseInt(result) }))
         .catch((error) => console.error('Error:', error))
-    get(`${props.key},3`)
+    get(props.key, 3)
         .then((response) => response.text())
         .then((result) => setState({ max: parseInt(result) }))
         .catch((error) => console.error('Error:', error))
     const updateSelected = (selected) => {
         setState({ selected: selected })
-        send(props.key, `1,${selected}`)
+        send(props.key, 1, selected)
     }
     const updateColor = (index, value) => {
         setState("colors", index, value)
-        send(props.key, `2,${index},${value}`)
+        send(props.key, 2, index, value)
     }
     const removeColor = (index) => {
         setState("colors", [...state.colors.slice(0, index), ...state.colors.slice(index + 1)])
-        send(props.key, `0,${state.colors.length}`)
+        send(props.key, 0, state.colors.length)
         for (let i = index; i < state.colors.length; i++)
-            send(props.key, `2,${i},${state.colors[i]}`)
+            send(props.key, 2, i, state.colors[i])
     }
     return (
         <>

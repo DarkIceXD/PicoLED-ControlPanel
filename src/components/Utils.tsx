@@ -1,15 +1,16 @@
 const url = "http://192.168.4.1/api"
+const delim = ";"
 
-export function send(key, value) {
-    fetch(url, {
+export function send(...keys) {
+    return fetch(url, {
         method: "POST",
-        body: `${key},${value}`
+        body: keys.join(delim)
     })
 }
 
-export function get(key) {
+export function get(...keys) {
     return fetch(url + "/get", {
         method: "POST",
-        body: `${key}`
+        body: keys.join(delim)
     })
 }

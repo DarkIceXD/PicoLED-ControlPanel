@@ -2,6 +2,7 @@
 import Page from "../layouts/Page.astro";
 import Container from "../components/Container.astro";
 import Input from "../components/Input";
+import Checkbox from "../components/Checkbox";
 import Dropdown from "../components/Dropdown";
 import Colors from "../components/Colors";
 import Button from "../components/Button";
@@ -33,6 +34,9 @@ let key = 0;
 					<Input client:load key={key++} type="range" max="255"
 						>Brightness</Input
 					>
+					<Checkbox client:load key={key++} type="checkbox"
+						>Reverse</Checkbox
+					>
 				</div>
 			</fieldset>
 			<fieldset>
@@ -50,7 +54,7 @@ let key = 0;
 							"Fade",
 							"Fade Moving",
 							"Snakes",
-							"Comets",
+							"Faded Snakes",
 							"Sparkle",
 						]}
 					/>

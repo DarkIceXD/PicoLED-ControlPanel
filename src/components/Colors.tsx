@@ -32,6 +32,10 @@ export default function (props) {
         setState("colors", index, value)
         send(props.key, 2, index, value)
     }
+    const addColor = () => {
+        updateColor(state.colors.length, "#ffffff")
+        send(props.key, 0, state.colors.length)
+    }
     const removeColor = (index) => {
         setState("colors", [...state.colors.slice(0, index), ...state.colors.slice(index + 1)])
         send(props.key, 0, state.colors.length)
@@ -76,7 +80,7 @@ export default function (props) {
                 </table>
                 <Show when={state.colors.length < state.max}>
                     <button
-                        onClick={() => updateColor(state.colors.length, "#ffffff")}
+                        onClick={() => addColor()}
                         class="px-2 py-1 bg-blue-600 text-white rounded shadow hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 active:shadow-lg transition duration-300 my-2">
                         +
                     </button>

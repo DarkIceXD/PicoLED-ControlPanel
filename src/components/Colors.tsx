@@ -1,16 +1,22 @@
 /* @jsxImportSource solid-js */
-import { For, Show } from "solid-js";
-import { createStore } from "solid-js/store";
+import { createSignal, For, Show } from "solid-js"
 import { get, send } from "./Utils"
 
 export default function (props) {
-    const [state, setState] = createStore({ selected: 0, colors: [], max: 0 })
+    const [selected, setSelected] = createSignal(0)
+    const [colors, setColors] = createSignal([])
+    const [max, setMax] = createSignal(0)
     const refresh = (count) => {
-        for (let i = 0; i < count; i++)
+        for (let i = 0; i < count; i++) {
+            setColors((old) => [...old, "#ffffff"])
             get(props.key, 2, i)
                 .then((response) => response.text())
-                .then((result) => setState("colors", i, result))
+                .then((result) => setColors((old) => {
+                    old[i] = result
+                    return old
+                }))
                 .catch((error) => console.error('Error:', error))
+        }
     }
     get(props.key, 0)
         .then((response) => response.text())
@@ -18,35 +24,39 @@ export default function (props) {
         .catch((error) => console.error('Error:', error))
     get(props.key, 1)
         .then((response) => response.text())
-        .then((result) => setState({ selected: parseInt(result) }))
+        .then((result) => setSelected(parseInt(result)))
         .catch((error) => console.error('Error:', error))
     get(props.key, 3)
         .then((response) => response.text())
-        .then((result) => setState({ max: parseInt(result) }))
+        .then((result) => setMax(parseInt(result)))
         .catch((error) => console.error('Error:', error))
     const updateSelected = (selected) => {
-        setState({ selected: selected })
+        setSelected(selected)
         send(props.key, 1, selected)
     }
     const updateColor = (index, value) => {
-        setState("colors", index, value)
+        setColors((old) => {
+            old[index] = value
+            return old
+        })
         send(props.key, 2, index, value)
     }
     const addColor = () => {
-        updateColor(state.colors.length, "#ffffff")
-        send(props.key, 0, state.colors.length)
+        setColors((old) => [...old, "#ffffff"])
+        send(props.key, 0, colors().length)
     }
     const removeColor = (index) => {
-        setState("colors", [...state.colors.slice(0, index), ...state.colors.slice(index + 1)])
-        send(props.key, 0, state.colors.length)
-        for (let i = index; i < state.colors.length; i++)
-            send(props.key, 2, i, state.colors[i])
+        setColors((old) => [...old.slice(0, index), ...old.slice(index + 1)])
+        const newColors = colors()
+        send(props.key, 0, newColors.length)
+        for (let i = index; i < newColors.length; i++)
+            send(props.key, 2, i, newColors[i])
     }
     return (
         <>
             <div>
                 <table>
-                    <For each={state.colors}>
+                    <For each={colors()}>
                         {(s, i) => (
                             <tr>
                                 <td>
@@ -54,7 +64,7 @@ export default function (props) {
                                         type="radio"
                                         class="form-radio h-4 w-4"
                                         onChange={() => updateSelected(i())}
-                                        checked={state.selected == i()}
+                                        checked={selected() == i()}
                                     />
                                 </td>
                                 <td>
@@ -70,7 +80,7 @@ export default function (props) {
                                         <button
                                             onClick={() => removeColor(i())}
                                             class="px-2 py-1 bg-red-600 text-white rounded shadow hover:bg-red-700 hover:shadow-lg active:bg-red-800 active:shadow-lg transition duration-300">
-                                            x
+                                            -
                                         </button>
                                     </Show>
                                 </td>
@@ -78,7 +88,7 @@ export default function (props) {
                         )}
                     </For>
                 </table>
-                <Show when={state.colors.length < state.max}>
+                <Show when={colors().length < max()}>
                     <button
                         onClick={() => addColor()}
                         class="px-2 py-1 bg-blue-600 text-white rounded shadow hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 active:shadow-lg transition duration-300 my-2">

@@ -11,10 +11,7 @@ export default function (props) {
             setColors((old) => [...old, "#ffffff"])
             get(props.key, 2, i)
                 .then((response) => response.text())
-                .then((result) => setColors((old) => {
-                    old[i] = result
-                    return old
-                }))
+                .then((result) => setColors((old) => [...old.slice(0, i), result, ...old.slice(i + 1)]))
                 .catch((error) => console.error('Error:', error))
         }
     }
@@ -35,10 +32,6 @@ export default function (props) {
         send(props.key, 1, selected)
     }
     const updateColor = (index, value) => {
-        setColors((old) => {
-            old[index] = value
-            return old
-        })
         send(props.key, 2, index, value)
     }
     const addColor = () => {

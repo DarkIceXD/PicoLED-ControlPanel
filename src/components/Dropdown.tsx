@@ -1,4 +1,3 @@
-/* @jsxImportSource solid-js */
 import { createSignal, For } from "solid-js"
 import { get, send } from "./Utils"
 

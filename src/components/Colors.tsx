@@ -1,4 +1,3 @@
-/* @jsxImportSource solid-js */
 import { createSignal, For, Show } from "solid-js"
 import { BiRegularTrash, BiRegularPlus } from "solid-icons/bi"
 import { get, send } from "./Utils"
